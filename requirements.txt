@@ -1,0 +1,14 @@
+# Reference dependencies for the controlled benchmark.
+# Exact historical versions were not fully recoverable; do not treat this as a
+# claim that the historical notebook used these exact versions.
+torch
+transformers
+datasets
+trl
+peft
+accelerate
+deepspeed
+pyyaml
+pandas
+matplotlib
+psutil
