@@ -25,6 +25,7 @@ def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--method", choices=["ddp", "fsdp", "zero2", "zero3"], required=True)
     p.add_argument("--config", default="configs/controlled.yaml")
+    p.add_argument("--run-id", default="run1")
     return p.parse_args()
 
 
@@ -160,11 +161,12 @@ def main():
         "host_rss_gb": host_rss_gb(),
         "environment": environment_info(),
         "config_hash": config_hash(cfg),
+        "run_id": args.run_id,
     }
 
     rank = int(os.environ.get("RANK", "0"))
     if rank == 0:
-        out = Path("results/raw") / f"{args.method}_seed{cfg['seed']}.json"
+        out = Path("results/raw") / f"{args.run_id}_{args.method}_seed{cfg['seed']}.json"
         save_json(out, result)
         print(json.dumps(result, indent=2))
 
